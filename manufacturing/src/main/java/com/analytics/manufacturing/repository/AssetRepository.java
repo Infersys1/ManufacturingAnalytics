@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.analytics.manufacturing.entity.Asset;
 
 @Repository
-@RepositoryRestResource(path="area")
+@RepositoryRestResource(path="asset")
 public interface AssetRepository extends JpaRepository<Asset, Long>{
 	
 	List<Asset> findByAssetNo(@RequestParam("assetNo") String assetNo);
