@@ -2,33 +2,17 @@ package com.analytics.manufacturing.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Setter
-@Getter
-@ToString
 @Table(name = "analy_ma_area")
 public class Area {
 	
@@ -36,9 +20,8 @@ public class Area {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(mappedBy = "area", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Zone zone;
+	
+	
 	
 	@Column(name="area_name")
 	private String areaName;
@@ -119,22 +102,9 @@ public class Area {
 		this.updatedBy = updatedBy;
 	}
 
-	public Zone getZone() {
-		return zone;
-	}
-
-	public void setZone(Zone zone) {
-		this.zone = zone;
-	}
 
 	
-	@Override
-	public String toString() {
-		return "Area [id=" + id + ", areaName=" + areaName + ", zone=" + zone + ", plantName=" + plantName
-				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", createdBy=" + createdBy
-				+ ", updatedBy=" + updatedBy + "]";
-	}
-
+	
 	
 	
 	

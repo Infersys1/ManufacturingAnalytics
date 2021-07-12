@@ -2,7 +2,6 @@ package com.analytics.manufacturing.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,20 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Setter
-@Getter
-@ToString
 @Table(name = "analy_ma_zone")
 public class Zone {
 	
@@ -37,12 +23,7 @@ public class Zone {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToOne(mappedBy = "zone", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Asset asset;
-	@OneToOne(mappedBy = "zone", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private User user;
+	
 	
 	
 	
@@ -113,23 +94,10 @@ public class Zone {
 	public void setArea(Area area) {
 		this.area = area;
 	}
-	public Asset getAsset() {
-		return asset;
-	}
-	public void setAsset(Asset asset) {
-		this.asset = asset;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	@Override
 	public String toString() {
-		return "Zone [id=" + id + ", asset=" + asset + ", user=" + user + ", zoneName=" + zoneName + ", area=" + area
-				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", createdBy=" + createdBy
-				+ ", updatedBy=" + updatedBy + "]";
+		return "Zone [id=" + id + ", zoneName=" + zoneName + ", area=" + area + ", createdTime=" + createdTime
+				+ ", updatedTime=" + updatedTime + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
 	
 	

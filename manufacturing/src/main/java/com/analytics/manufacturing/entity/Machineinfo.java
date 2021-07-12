@@ -15,14 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@Setter
-@Getter
-@ToString
 @Table(name = "analy_ma_machineinfo")
 public class Machineinfo {
 	
@@ -96,11 +89,7 @@ public class Machineinfo {
 	public void setEquipinfo(Equipinfo equipinfo) {
 		this.equipinfo = equipinfo;
 	}
-	@Override
-	public String toString() {
-		return "Machineinfo [id=" + id + ", equipinfo=" + equipinfo + ", tag=" + tag + ", createdTime=" + createdTime
-				+ ", updatedTime=" + updatedTime + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
-	}
+	
 	
 	
 	

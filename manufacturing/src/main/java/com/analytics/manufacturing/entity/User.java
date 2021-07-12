@@ -2,7 +2,6 @@ package com.analytics.manufacturing.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,23 +15,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@Setter
-@Getter
-@ToString
+
 @Table(name = "analy_ma_user")
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Userassetmap userassetmap;
+	
 	
 	
 	@Column(name="user_id")
@@ -116,18 +107,7 @@ public class User {
 	public void setAsset(Asset asset) {
 		this.asset = asset;
 	}
-	public Userassetmap getUserassetmap() {
-		return userassetmap;
-	}
-	public void setUserassetmap(Userassetmap userassetmap) {
-		this.userassetmap = userassetmap;
-	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", userassetmap=" + userassetmap + ", userId=" + userId + ", name=" + name + ", zone="
-				+ zone + ", asset=" + asset + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
-	}
+	
 
 	
 	

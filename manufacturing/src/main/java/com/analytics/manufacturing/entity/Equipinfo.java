@@ -2,7 +2,6 @@ package com.analytics.manufacturing.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,26 +15,14 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@Setter
-@Getter
-@ToString
 @Table(name = "analy_ma_equipinfo")
 public class Equipinfo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToOne(mappedBy = "equipinfo", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Machineinfo machineinfo;
-	@OneToOne(mappedBy = "equipinfo", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Equipment equipment;
+	
 	
 	
 	@Column(name="equipment_no")
@@ -99,24 +86,7 @@ public class Equipinfo {
 	public void setAsset(Asset asset) {
 		this.asset = asset;
 	}
-	public Machineinfo getMachineinfo() {
-		return machineinfo;
-	}
-	public void setMachineinfo(Machineinfo machineinfo) {
-		this.machineinfo = machineinfo;
-	}
-	public Equipment getEquipment() {
-		return equipment;
-	}
-	public void setEquipment(Equipment equipment) {
-		this.equipment = equipment;
-	}
-	@Override
-	public String toString() {
-		return "Equipinfo [id=" + id + ", machineinfo=" + machineinfo + ", equipment=" + equipment + ", equipmentNo="
-				+ equipmentNo + ", asset=" + asset + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
-	}
+	
 	
 	
 	

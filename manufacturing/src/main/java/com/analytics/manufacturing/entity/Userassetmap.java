@@ -4,25 +4,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
- @Setter
- @Getter
- @ToString
+ 
  @Table(name = "analy_ma_userassetmap")
 public class Userassetmap {
 	
@@ -30,12 +21,7 @@ public class Userassetmap {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-	private User user;
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "asset_id")
-	private Asset asset;
+	
 	
 	@Column(name="created_time", nullable=false, updatable=false)
 	@CreationTimestamp
@@ -79,23 +65,7 @@ public class Userassetmap {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Asset getAsset() {
-		return asset;
-	}
-	public void setAsset(Asset asset) {
-		this.asset = asset;
-	}
-	@Override
-	public String toString() {
-		return "Userassetmap [id=" + id + ", user=" + user + ", asset=" + asset + ", createdTime=" + createdTime
-				+ ", updatedTime=" + updatedTime + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
-	}
+	
 
 	
 	

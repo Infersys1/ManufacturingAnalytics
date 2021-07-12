@@ -15,14 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@Setter
-@Getter
-@ToString
+
 @Table(name = "analy_tr_equipment")
 public class Equipment {
 	
@@ -30,9 +24,6 @@ public class Equipment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "equipinfo_id")
-	private Equipinfo equipinfo;
 	
 	@Column(name="event_start")
 	private Date eventStart;
@@ -100,24 +91,14 @@ public class Equipment {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	public Equipinfo getEquipinfo() {
-		return equipinfo;
-	}
-	public void setEquipinfo(Equipinfo equipinfo) {
-		this.equipinfo = equipinfo;
-	}
+	
 	public Asset getAsset() {
 		return asset;
 	}
 	public void setAsset(Asset asset) {
 		this.asset = asset;
 	}
-	@Override
-	public String toString() {
-		return "Equipment [id=" + id + ", equipinfo=" + equipinfo + ", eventStart=" + eventStart + ", eventEnd="
-				+ eventEnd + ", asset=" + asset + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
-	}
+	
 
 
 	

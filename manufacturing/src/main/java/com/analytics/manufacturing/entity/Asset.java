@@ -2,7 +2,6 @@ package com.analytics.manufacturing.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,14 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@Setter
-@Getter
-@ToString
 @Table(name = "analy_ma_asset")
 public class Asset {
 
@@ -31,21 +23,7 @@ public class Asset {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Equipinfo equipinfo;
-	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Plan plan;
-	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private User user;
-	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Userassetmap userassetmap;
-	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Equipment equipment;
+	
 	
 	
 	
@@ -118,43 +96,7 @@ public class Asset {
 	public void setZone(Zone zone) {
 		this.zone = zone;
 	}
-	public Equipinfo getEquipinfo() {
-		return equipinfo;
-	}
-	public void setEquipinfo(Equipinfo equipinfo) {
-		this.equipinfo = equipinfo;
-	}
-	public Plan getPlan() {
-		return plan;
-	}
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Userassetmap getUserassetmap() {
-		return userassetmap;
-	}
-	public void setUserassetmap(Userassetmap userassetmap) {
-		this.userassetmap = userassetmap;
-	}
-	public Equipment getEquipment() {
-		return equipment;
-	}
-	public void setEquipment(Equipment equipment) {
-		this.equipment = equipment;
-	}
-	@Override
-	public String toString() {
-		return "Asset [id=" + id + ", equipinfo=" + equipinfo + ", plan=" + plan + ", user=" + user + ", userassetmap="
-				+ userassetmap + ", equipment=" + equipment + ", assetNo=" + assetNo + ", assetDescription="
-				+ assetDescription + ", zone=" + zone + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
-	}
+	
 	
 	
 	

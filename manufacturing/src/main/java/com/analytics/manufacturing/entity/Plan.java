@@ -15,14 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@Setter
-@Getter
-@ToString
 @Table(name = "analy_ma_plan")
 public class Plan {
 	
@@ -109,12 +102,7 @@ public class Plan {
 	public void setAsset(Asset asset) {
 		this.asset = asset;
 	}
-	@Override
-	public String toString() {
-		return "Plan [id=" + id + ", asset=" + asset + ", startDate=" + startDate + ", endDate=" + endDate + ", status="
-				+ status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", createdBy=" + createdBy
-				+ ", updatedBy=" + updatedBy + "]";
-	}
+	
 	
 
 	
