@@ -24,11 +24,11 @@ public class Zone {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
-	
+		
 	
 	@Column(name="zone_name")
 	private String zoneName;
+		
 	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
@@ -94,11 +94,8 @@ public class Zone {
 	public void setArea(Area area) {
 		this.area = area;
 	}
-	@Override
-	public String toString() {
-		return "Zone [id=" + id + ", zoneName=" + zoneName + ", area=" + area + ", createdTime=" + createdTime
-				+ ", updatedTime=" + updatedTime + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
-	}
+	
+
 	
 	
 	
