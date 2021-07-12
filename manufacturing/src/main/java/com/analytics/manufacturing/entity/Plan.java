@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,8 +29,13 @@ public class Plan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="asset_id")
-	private Long assetId;
+	
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asset_id")
+	private Asset asset;
+	
+	
 	@Column(name="start_date")
 	private Date startDate;
 	@Column(name="end_date")
@@ -52,12 +60,7 @@ public class Plan {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getAssetId() {
-		return assetId;
-	}
-	public void setAssetId(Long assetId) {
-		this.assetId = assetId;
-	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -100,12 +103,19 @@ public class Plan {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	public Asset getAsset() {
+		return asset;
+	}
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
 	@Override
 	public String toString() {
-		return "Plan [id=" + id + ", assetId=" + assetId + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+		return "Plan [id=" + id + ", asset=" + asset + ", startDate=" + startDate + ", endDate=" + endDate + ", status="
+				+ status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", createdBy=" + createdBy
+				+ ", updatedBy=" + updatedBy + "]";
 	}
+	
 
 	
 	

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,10 +37,25 @@ public class Zone {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@OneToOne(mappedBy = "zone", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private Asset asset;
+	@OneToOne(mappedBy = "zone", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private User user;
+	
+	
+	
 	@Column(name="zone_name")
 	private String zoneName;
-	@Column(name="area_id")
-	private Long areaId;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "area_id")
+	private Area area;
+		
+	
+	
+	
 	
 	@Column(name="created_time", nullable=false, updatable=false)
 	@CreationTimestamp
@@ -52,8 +68,7 @@ public class Zone {
 	@Column(name="updated_by")
 	private String updatedBy;
 	
-	@OneToOne(targetEntity = Area.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "zone_fk1", referencedColumnName = "area_id")
+	
 	
 	public Long getId() {
 		return id;
@@ -67,12 +82,7 @@ public class Zone {
 	public void setZoneName(String zoneName) {
 		this.zoneName = zoneName;
 	}
-	public Long getAreaId() {
-		return areaId;
-	}
-	public void setAreaId(Long areaId) {
-		this.areaId = areaId;
-	}
+	
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -97,11 +107,36 @@ public class Zone {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	public Area getArea() {
+		return area;
+	}
+	public void setArea(Area area) {
+		this.area = area;
+	}
+	public Asset getAsset() {
+		return asset;
+	}
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
-		return "Zone [id=" + id + ", zoneName=" + zoneName + ", areaId=" + areaId + ", createdTime=" + createdTime
-				+ ", updatedTime=" + updatedTime + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+		return "Zone [id=" + id + ", asset=" + asset + ", user=" + user + ", zoneName=" + zoneName + ", area=" + area
+				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", createdBy=" + createdBy
+				+ ", updatedBy=" + updatedBy + "]";
 	}
+	
+	
+	
+	
+	
+
 	
 	
 	

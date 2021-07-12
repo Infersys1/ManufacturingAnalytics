@@ -2,11 +2,15 @@ package com.analytics.manufacturing.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,14 +30,25 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private Userassetmap userassetmap;
+	
+	
 	@Column(name="user_id")
 	private Long userId;
 	@Column(name="name")
 	private String name;
-	@Column(name="zone_id")
-	private Long zoneId;
-	@Column(name="asset_id")
-	private Long assetId;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "zone_id")
+	private Zone zone;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asset_id")
+	private Asset asset;
+	
+	
 	
 	@Column(name="created_time", nullable=false, updatable=false)
 	@CreationTimestamp
@@ -64,18 +79,7 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Long getZoneId() {
-		return zoneId;
-	}
-	public void setZoneId(Long zoneId) {
-		this.zoneId = zoneId;
-	}
-	public Long getAssetId() {
-		return assetId;
-	}
-	public void setAssetId(Long assetId) {
-		this.assetId = assetId;
-	}
+	
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -100,11 +104,29 @@ public class User {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	public Zone getZone() {
+		return zone;
+	}
+	public void setZone(Zone zone) {
+		this.zone = zone;
+	}
+	public Asset getAsset() {
+		return asset;
+	}
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
+	public Userassetmap getUserassetmap() {
+		return userassetmap;
+	}
+	public void setUserassetmap(Userassetmap userassetmap) {
+		this.userassetmap = userassetmap;
+	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userId=" + userId + ", name=" + name + ", zoneId=" + zoneId + ", assetId="
-				+ assetId + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", createdBy=" + createdBy
-				+ ", updatedBy=" + updatedBy + "]";
+		return "User [id=" + id + ", userassetmap=" + userassetmap + ", userId=" + userId + ", name=" + name + ", zone="
+				+ zone + ", asset=" + asset + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
 
 	

@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,10 +29,13 @@ public class Userassetmap {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="user_id")
-	private Long userId;
-	@Column(name="asset_id")
-	private Long assetId;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+	private User user;
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asset_id")
+	private Asset asset;
 	
 	@Column(name="created_time", nullable=false, updatable=false)
 	@CreationTimestamp
@@ -48,18 +54,7 @@ public class Userassetmap {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-	public Long getAssetId() {
-		return assetId;
-	}
-	public void setAssetId(Long assetId) {
-		this.assetId = assetId;
-	}
+	
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -84,12 +79,24 @@ public class Userassetmap {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Asset getAsset() {
+		return asset;
+	}
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
 	@Override
 	public String toString() {
-		return "Userassetmap [id=" + id + ", userId=" + userId + ", assetId=" + assetId + ", createdTime=" + createdTime
+		return "Userassetmap [id=" + id + ", user=" + user + ", asset=" + asset + ", createdTime=" + createdTime
 				+ ", updatedTime=" + updatedTime + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
-	
+
 	
 	
 	

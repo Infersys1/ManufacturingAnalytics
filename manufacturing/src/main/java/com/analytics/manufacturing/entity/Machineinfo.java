@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,10 +30,16 @@ public class Machineinfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="equip_id")
-	private Long EquipId;
-	@Column(name="tag_id")
-	private Long TagId;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "equip_id")
+	private Equipinfo equipinfo;
+		
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tag_id")
+	private Tag tag;
+	
 	
 	@Column(name="created_time", nullable=false, updatable=false)
 	@CreationTimestamp
@@ -49,18 +58,8 @@ public class Machineinfo {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getEquipId() {
-		return EquipId;
-	}
-	public void setEquipId(Long equipId) {
-		EquipId = equipId;
-	}
-	public Long getTagId() {
-		return TagId;
-	}
-	public void setTagId(Long tagId) {
-		TagId = tagId;
-	}
+	
+	
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -85,11 +84,26 @@ public class Machineinfo {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	public Tag getTag() {
+		return tag;
+	}
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
+	public Equipinfo getEquipinfo() {
+		return equipinfo;
+	}
+	public void setEquipinfo(Equipinfo equipinfo) {
+		this.equipinfo = equipinfo;
+	}
 	@Override
 	public String toString() {
-		return "Machineinfo [id=" + id + ", EquipId=" + EquipId + ", TagId=" + TagId + ", createdTime=" + createdTime
+		return "Machineinfo [id=" + id + ", equipinfo=" + equipinfo + ", tag=" + tag + ", createdTime=" + createdTime
 				+ ", updatedTime=" + updatedTime + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
+	
+	
+	
 
 	
 	

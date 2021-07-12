@@ -2,11 +2,14 @@ package com.analytics.manufacturing.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,8 +35,16 @@ public class Area {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@OneToOne(mappedBy = "area", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private Zone zone;
+	
 	@Column(name="area_name")
 	private String areaName;
+		
+	
+	
 	@Column(name="plant_name")
 	private String plantName;
 	
@@ -48,6 +59,8 @@ public class Area {
 	private String createdBy;
 	@Column(name="updated_by")
 	private String updatedBy;
+	
+	
 
 	public Long getId() {
 		return id;
@@ -106,12 +119,23 @@ public class Area {
 		this.updatedBy = updatedBy;
 	}
 
-	@Override
-	public String toString() {
-		return "Area [id=" + id + ", areaName=" + areaName + ", plantName=" + plantName + ", createdTime=" + createdTime
-				+ ", updatedTime=" + updatedTime + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+	public Zone getZone() {
+		return zone;
 	}
 
+	public void setZone(Zone zone) {
+		this.zone = zone;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "Area [id=" + id + ", areaName=" + areaName + ", zone=" + zone + ", plantName=" + plantName
+				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", createdBy=" + createdBy
+				+ ", updatedBy=" + updatedBy + "]";
+	}
+
+	
 	
 	
 

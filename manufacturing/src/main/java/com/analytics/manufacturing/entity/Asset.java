@@ -2,11 +2,15 @@ package com.analytics.manufacturing.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,12 +31,33 @@ public class Asset {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private Equipinfo equipinfo;
+	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private Plan plan;
+	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private User user;
+	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private Userassetmap userassetmap;
+	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private Equipment equipment;
+	
+	
+	
 	@Column(name="asset_no")
 	private String assetNo;
 	@Column(name="asset_description")
 	private String assetDescription;
-	@Column(name="zone_id")
-	private Long zoneId;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "zone_id")
+	private Zone zone;
+	
 	
 	@Column(name="created_time", nullable=false, updatable=false)
 	@CreationTimestamp
@@ -62,12 +87,7 @@ public class Asset {
 	public void setAssetDescription(String assetDescription) {
 		this.assetDescription = assetDescription;
 	}
-	public Long getZoneId() {
-		return zoneId;
-	}
-	public void setZoneId(Long zoneId) {
-		this.zoneId = zoneId;
-	}
+	
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -92,14 +112,49 @@ public class Asset {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	public Zone getZone() {
+		return zone;
+	}
+	public void setZone(Zone zone) {
+		this.zone = zone;
+	}
+	public Equipinfo getEquipinfo() {
+		return equipinfo;
+	}
+	public void setEquipinfo(Equipinfo equipinfo) {
+		this.equipinfo = equipinfo;
+	}
+	public Plan getPlan() {
+		return plan;
+	}
+	public void setPlan(Plan plan) {
+		this.plan = plan;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Userassetmap getUserassetmap() {
+		return userassetmap;
+	}
+	public void setUserassetmap(Userassetmap userassetmap) {
+		this.userassetmap = userassetmap;
+	}
+	public Equipment getEquipment() {
+		return equipment;
+	}
+	public void setEquipment(Equipment equipment) {
+		this.equipment = equipment;
+	}
 	@Override
 	public String toString() {
-		return "Asset [id=" + id + ", assetNo=" + assetNo + ", assetDescription=" + assetDescription + ", zoneId="
-				+ zoneId + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", createdBy=" + createdBy
-				+ ", updatedBy=" + updatedBy + "]";
+		return "Asset [id=" + id + ", equipinfo=" + equipinfo + ", plan=" + plan + ", user=" + user + ", userassetmap="
+				+ userassetmap + ", equipment=" + equipment + ", assetNo=" + assetNo + ", assetDescription="
+				+ assetDescription + ", zone=" + zone + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
-	
-	
 	
 	
 	

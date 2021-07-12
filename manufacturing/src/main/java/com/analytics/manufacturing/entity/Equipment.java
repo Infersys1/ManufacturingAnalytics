@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,14 +29,21 @@ public class Equipment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="equipinfo_id")
-	private Long equipinfoId;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "equipinfo_id")
+	private Equipinfo equipinfo;
+	
 	@Column(name="event_start")
 	private Date eventStart;
 	@Column(name="event_end")
 	private Date eventEnd;
-	@Column(name="asset_id")
-	private Long assetId;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asset_id")
+	private Asset asset;
+	
+	
 	
 	@Column(name="created_time", nullable=false, updatable=false)
 	@CreationTimestamp
@@ -52,12 +62,7 @@ public class Equipment {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getEquipinfoId() {
-		return equipinfoId;
-	}
-	public void setEquipinfoId(Long equipinfoId) {
-		this.equipinfoId = equipinfoId;
-	}
+	
 	public Date getEventStart() {
 		return eventStart;
 	}
@@ -70,12 +75,7 @@ public class Equipment {
 	public void setEventEnd(Date eventEnd) {
 		this.eventEnd = eventEnd;
 	}
-	public Long getAssetId() {
-		return assetId;
-	}
-	public void setAssetId(Long assetId) {
-		this.assetId = assetId;
-	}
+	
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -100,12 +100,25 @@ public class Equipment {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	public Equipinfo getEquipinfo() {
+		return equipinfo;
+	}
+	public void setEquipinfo(Equipinfo equipinfo) {
+		this.equipinfo = equipinfo;
+	}
+	public Asset getAsset() {
+		return asset;
+	}
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
 	@Override
 	public String toString() {
-		return "Equipment [id=" + id + ", equipinfoId=" + equipinfoId + ", eventStart=" + eventStart + ", eventEnd="
-				+ eventEnd + ", assetId=" + assetId + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+		return "Equipment [id=" + id + ", equipinfo=" + equipinfo + ", eventStart=" + eventStart + ", eventEnd="
+				+ eventEnd + ", asset=" + asset + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
 				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
+
 
 	
 	
