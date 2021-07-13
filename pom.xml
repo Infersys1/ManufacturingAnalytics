@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.analytics</groupId>
-	<artifactId>manufacturing</artifactId>
+	<artifactId>ManufacturingAnalytics</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>manufacturing</name>
-	<description>Project for manufacturing</description>
+	<name>ManufacturingAnalytics</name>
+	<description>Project for Analytics of Manufacturing</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
