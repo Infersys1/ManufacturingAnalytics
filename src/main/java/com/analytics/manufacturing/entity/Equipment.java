@@ -8,8 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,14 +24,19 @@ public class Equipment {
 	private Long id;
 	
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User equipment_createdBy;
+	
+	
+	
 	@Column(name="event_start")
 	private Date eventStart;
 	@Column(name="event_end")
 	private Date eventEnd;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "asset_id")
-	private Asset asset;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Equipinfo equipinfo;
+	
 	
 	
 	
@@ -43,8 +47,7 @@ public class Equipment {
 	@Column(name="updated_time")
 	@UpdateTimestamp
 	private Date updatedTime;
-	@Column(name="created_by")
-	private String createdBy;
+	
 	@Column(name="updated_by")
 	private String updatedBy;
 	public Long getId() {
@@ -79,25 +82,33 @@ public class Equipment {
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-	public String getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
+	
 	public String getUpdatedBy() {
 		return updatedBy;
 	}
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	public Equipinfo getEquipinfo() {
+		return equipinfo;
+	}
+	public void setEquipinfo(Equipinfo equipinfo) {
+		this.equipinfo = equipinfo;
+	}
+	public User getEquipment_createdBy() {
+		return equipment_createdBy;
+	}
+	public void setEquipment_createdBy(User equipment_createdBy) {
+		this.equipment_createdBy = equipment_createdBy;
+	}
+	@Override
+	public String toString() {
+		return "Equipment [id=" + id + ", equipment_createdBy=" + equipment_createdBy + ", eventStart=" + eventStart
+				+ ", eventEnd=" + eventEnd + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ ", updatedBy=" + updatedBy + "]";
+	}
 	
-	public Asset getAsset() {
-		return asset;
-	}
-	public void setAsset(Asset asset) {
-		this.asset = asset;
-	}
+	
 	
 
 

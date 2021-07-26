@@ -1,6 +1,7 @@
 package com.analytics.manufacturing.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,14 +25,17 @@ public class Zone {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-		
+	@OneToMany(mappedBy = "zone")
+	private List<Asset> assets;	
+	
+	@OneToMany(mappedBy = "zone")
+	private List<User> users;
 	
 	@Column(name="zone_name")
 	private String zoneName;
 		
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "area_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Area area;
 		
 	
@@ -44,10 +48,7 @@ public class Zone {
 	@Column(name="updated_time")
 	@UpdateTimestamp
 	private Date updatedTime;
-	@Column(name="created_by")
-	private String createdBy;
-	@Column(name="updated_by")
-	private String updatedBy;
+	
 	
 	
 	
@@ -76,24 +77,33 @@ public class Zone {
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-	public String getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
+	
+	
 	public Area getArea() {
 		return area;
 	}
 	public void setArea(Area area) {
 		this.area = area;
 	}
+	public List<Asset> getAssets() {
+		return assets;
+	}
+	public void setAssets(List<Asset> assets) {
+		this.assets = assets;
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	@Override
+	public String toString() {
+		return "Zone [id=" + id + ", assets=" + assets + ", users=" + users + ", zoneName=" + zoneName
+				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+	}
+	
+	
 	
 
 	

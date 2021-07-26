@@ -1,6 +1,7 @@
 package com.analytics.manufacturing.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,16 +24,19 @@ public class Equipinfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@OneToMany(mappedBy = "equipinfo")
+	private List<Machineinfo> machineinfos;
 	
+	@OneToMany(mappedBy = "equipinfo")
+	private List<Equipment> equipments;
 	
 	@Column(name="equipment_no")
 	private String equipmentNo;
 	
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "asset_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Asset asset;
-	
+		
 	@Column(name="created_time", nullable=false, updatable=false)
 	@CreationTimestamp
 	private Date createdTime;
@@ -86,8 +90,24 @@ public class Equipinfo {
 	public void setAsset(Asset asset) {
 		this.asset = asset;
 	}
-	
-	
+	public List<Machineinfo> getMachineinfos() {
+		return machineinfos;
+	}
+	public void setMachineinfos(List<Machineinfo> machineinfos) {
+		this.machineinfos = machineinfos;
+	}
+	public List<Equipment> getEquipments() {
+		return equipments;
+	}
+	public void setEquipments(List<Equipment> equipments) {
+		this.equipments = equipments;
+	}
+	@Override
+	public String toString() {
+		return "Equipinfo [id=" + id + ", machineinfos=" + machineinfos + ", equipments=" + equipments
+				+ ", equipmentNo=" + equipmentNo + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+	}
 	
 	
 

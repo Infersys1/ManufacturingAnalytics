@@ -1,12 +1,14 @@
 package com.analytics.manufacturing.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,7 +23,8 @@ public class Area {
 	private Long id;
 	
 	
-	
+	@OneToMany(mappedBy = "area")
+	private List<Zone> zones;
 	
 	@Column(name="area_name")
 	private String areaName;
@@ -38,10 +41,7 @@ public class Area {
 	@Column(name="updated_time")
 	@UpdateTimestamp
 	private Date updatedTime;
-	@Column(name="created_by")
-	private String createdBy;
-	@Column(name="updated_by")
-	private String updatedBy;
+	
 	
 	
 
@@ -86,20 +86,14 @@ public class Area {
 	}
 
 	
-	public String getCreatedBy() {
-		return createdBy;
+	
+
+	public List<Zone> getZones() {
+		return zones;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setZones(List<Zone> zones) {
+		this.zones = zones;
 	}
 
 

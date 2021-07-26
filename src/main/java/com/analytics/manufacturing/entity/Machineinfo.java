@@ -8,8 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,14 +23,15 @@ public class Machineinfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "equip_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Equipinfo equipinfo;
 		
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tag_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Tag tag;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User machineinfo_createdBy;
 	
 	
 	@Column(name="created_time", nullable=false, updatable=false)
@@ -41,8 +41,7 @@ public class Machineinfo {
 	@Column(name="updated_time")
 	@UpdateTimestamp
 	private Date updatedTime;
-	@Column(name="created_by")
-	private String createdBy;
+	
 	@Column(name="updated_by")
 	private String updatedBy;
 	public Long getId() {
@@ -65,12 +64,7 @@ public class Machineinfo {
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-	public String getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
+	
 	public String getUpdatedBy() {
 		return updatedBy;
 	}
@@ -88,6 +82,17 @@ public class Machineinfo {
 	}
 	public void setEquipinfo(Equipinfo equipinfo) {
 		this.equipinfo = equipinfo;
+	}
+	public User getMachineinfo_createdBy() {
+		return machineinfo_createdBy;
+	}
+	public void setMachineinfo_createdBy(User machineinfo_createdBy) {
+		this.machineinfo_createdBy = machineinfo_createdBy;
+	}
+	@Override
+	public String toString() {
+		return "Machineinfo [id=" + id + ", machineinfo_createdBy=" + machineinfo_createdBy + ", createdTime="
+				+ createdTime + ", updatedTime=" + updatedTime + ", updatedBy=" + updatedBy + "]";
 	}
 	
 	

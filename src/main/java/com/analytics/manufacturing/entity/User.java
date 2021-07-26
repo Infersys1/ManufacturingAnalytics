@@ -1,6 +1,7 @@
 package com.analytics.manufacturing.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,19 +25,30 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@OneToMany(mappedBy = "tag_createdBy")
+	private List<Tag> tags;
 	
+	@OneToMany(mappedBy = "machineinfo_createdBy")
+	private List<Machineinfo> machineinfos;
+	
+	@OneToMany(mappedBy = "plan_createdBy")
+	private List<Plan> plans;
+	
+	@OneToMany(mappedBy = "userassetmap_createdBy")
+	private List<Userassetmap> userassetmaps;
+	
+	@OneToMany(mappedBy = "equipment_createdBy")
+	private List<Equipment> equipments;
 	
 	@Column(name="user_id")
 	private Long userId;
 	@Column(name="name")
 	private String name;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "zone_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Zone zone;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "asset_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Asset asset;
 	
 	
@@ -48,10 +60,7 @@ public class User {
 	@Column(name="updated_time")
 	@UpdateTimestamp
 	private Date updatedTime;
-	@Column(name="created_by")
-	private String createdBy;
-	@Column(name="updated_by")
-	private String updatedBy;
+	
 	public Long getId() {
 		return id;
 	}
@@ -83,18 +92,7 @@ public class User {
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-	public String getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
+	
 	public Zone getZone() {
 		return zone;
 	}
@@ -106,6 +104,42 @@ public class User {
 	}
 	public void setAsset(Asset asset) {
 		this.asset = asset;
+	}
+	public List<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+	public List<Machineinfo> getMachineinfos() {
+		return machineinfos;
+	}
+	public void setMachineinfos(List<Machineinfo> machineinfos) {
+		this.machineinfos = machineinfos;
+	}
+	public List<Plan> getPlans() {
+		return plans;
+	}
+	public void setPlans(List<Plan> plans) {
+		this.plans = plans;
+	}
+	public List<Userassetmap> getUserassetmaps() {
+		return userassetmaps;
+	}
+	public void setUserassetmaps(List<Userassetmap> userassetmaps) {
+		this.userassetmaps = userassetmaps;
+	}
+	public List<Equipment> getEquipments() {
+		return equipments;
+	}
+	public void setEquipments(List<Equipment> equipments) {
+		this.equipments = equipments;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", tags=" + tags + ", machineinfos=" + machineinfos + ", plans=" + plans
+				+ ", userassetmaps=" + userassetmaps + ", equipments=" + equipments + ", userId=" + userId + ", name="
+				+ name + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
 	}
 	
 

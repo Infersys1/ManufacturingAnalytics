@@ -8,8 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,8 +23,11 @@ public class Plan {
 	private Long id;
 	
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "asset_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User plan_createdBy;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Asset asset;
 	
 	
@@ -101,6 +103,18 @@ public class Plan {
 	}
 	public void setAsset(Asset asset) {
 		this.asset = asset;
+	}
+	public User getPlan_createdBy() {
+		return plan_createdBy;
+	}
+	public void setPlan_createdBy(User plan_createdBy) {
+		this.plan_createdBy = plan_createdBy;
+	}
+	@Override
+	public String toString() {
+		return "Plan [id=" + id + ", plan_createdBy=" + plan_createdBy + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
 	
 	
