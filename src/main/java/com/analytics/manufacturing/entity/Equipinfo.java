@@ -33,6 +33,8 @@ public class Equipinfo {
 	@Column(name="equipment_no")
 	private String equipmentNo;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User equipinfo_createdBy;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Asset asset;
@@ -43,8 +45,13 @@ public class Equipinfo {
 	@Column(name="updated_time")
 	@UpdateTimestamp
 	private Date updatedTime;
-	@Column(name="created_by")
-	private String createdBy;
+	
+	public User getEquipinfo_createdBy() {
+		return equipinfo_createdBy;
+	}
+	public void setEquipinfo_createdBy(User equipinfo_createdBy) {
+		this.equipinfo_createdBy = equipinfo_createdBy;
+	}
 	@Column(name="updated_by")
 	private String updatedBy;
 	public Long getId() {
@@ -72,12 +79,7 @@ public class Equipinfo {
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-	public String getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
+	
 	public String getUpdatedBy() {
 		return updatedBy;
 	}
@@ -105,8 +107,8 @@ public class Equipinfo {
 	@Override
 	public String toString() {
 		return "Equipinfo [id=" + id + ", machineinfos=" + machineinfos + ", equipments=" + equipments
-				+ ", equipmentNo=" + equipmentNo + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+				+ ", equipmentNo=" + equipmentNo + ", equipinfo_createdBy=" + equipinfo_createdBy + ", createdTime="
+				+ createdTime + ", updatedTime=" + updatedTime + ", updatedBy=" + updatedBy + "]";
 	}
 	
 	

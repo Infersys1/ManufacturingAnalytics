@@ -40,6 +40,9 @@ public class User {
 	@OneToMany(mappedBy = "equipment_createdBy")
 	private List<Equipment> equipments;
 	
+	@OneToMany(mappedBy = "equipinfo_createdBy")
+	private List<Equipinfo> equipinfos;
+	
 	@Column(name="user_id")
 	private Long userId;
 	@Column(name="name")
@@ -135,13 +138,19 @@ public class User {
 	public void setEquipments(List<Equipment> equipments) {
 		this.equipments = equipments;
 	}
+	public List<Equipinfo> getEquipinfos() {
+		return equipinfos;
+	}
+	public void setEquipinfos(List<Equipinfo> equipinfos) {
+		this.equipinfos = equipinfos;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", tags=" + tags + ", machineinfos=" + machineinfos + ", plans=" + plans
-				+ ", userassetmaps=" + userassetmaps + ", equipments=" + equipments + ", userId=" + userId + ", name="
-				+ name + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+				+ ", userassetmaps=" + userassetmaps + ", equipments=" + equipments + ", equipinfos=" + equipinfos
+				+ ", userId=" + userId + ", name=" + name + ", createdTime=" + createdTime + ", updatedTime="
+				+ updatedTime + "]";
 	}
-	
 
 	
 	
